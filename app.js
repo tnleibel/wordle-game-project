@@ -1,22 +1,59 @@
 /*-------------------------------- Constants --------------------------------*/
-const rules = "Welcome to Wordle!\nThe goal of the game is to guess a secret five-letter word.\nYou have six tries to guess the secret word.\nEach time you submit a guess, the letter tiles in that row will flip!\nGrey letters are not in the secret word.\nYellow letters are in the secret word, but are in the wrong position within it.\nGreen letters are both in the secret word and in the correct position.\nFive green letters means you've correctly guessed the secret word!"
-console.log(rules)
+const secretWord = ["", "", "", "", ""]
 
 /*---------------------------- Variables (state) ----------------------------*/
-
-
-
+let currentRow
+let currentTile
+let turn
+let winner
+let grid
 /*------------------------ Cached Element References ------------------------*/
-
-
-
+const rulesButton = document.querySelector(".open-modal")
+const closeRulesButton = document.querySelector(".close-button")
+const rulesOverlay = document.querySelector("#overlay")
+const gridEl = document.querySelectorAll(".sqr")
 /*-------------------------------- Functions --------------------------------*/
+function init() {
+    grid = [
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+    ]
+    turn = 1
+    currentRow = 0
+    currentTile = 0
+    winner = false
+}
+init()
 
+function updateGrid() {
+    grid.forEach((square, index) => {
+        gridEl[index].innerHTML = grid[currentRow, index]
+    })
+}
 
+function openModal() {
+    modal.classList.add("active")
+    rulesOverlay.classList.add("active")
+}
 
+function closeModal() {
+    modal.classList.remove("active")
+    rulesOverlay.classList.remove("active")
+}
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-
+rulesButton.addEventListener("click", () => {
+    const modal = document.querySelector(".modal")
+    openModal(modal)
+})
+closeRulesButton.addEventListener("click", () => {
+    const modal = document.querySelector(".modal")
+    closeModal(modal)
+})
 
 

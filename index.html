@@ -12,15 +12,24 @@
 
 <body>
     <h1>Wordle</h1>
-    <h2>The Rules</h2>
-    <p id="rules">Welcome to Wordle!<br>
-        The goal of the game is to guess a secret five-letter word.<br>
-        You have six tries to guess the secret word.<br>
-        Each time you submit a guess, the letter tiles in that row will flip!<br>
-        Grey letters are not in the secret word.<br>
-        Yellow letters are in the secret word, but are in the wrong position within it.<br>
-        Green letters are both in the secret word and in the correct position.<br>
-        Five green letters means you've correctly guessed the secret word!</p>
+    <button class="open-modal">Click here for the rules!</button>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="modal-title">The Rules</div>
+            <button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+        -The goal of Wordle is to guess a secret five-letter word.<br><br>
+        -You have six tries to guess the secret word.<br><br>
+        -Each time you submit a guess, the letter tiles in that row will flip and change color!<br><br>
+        -Grey letters are not in the secret word.<br><br>
+        -Yellow letters are in the secret word, but are in the wrong position within it.<br><br>
+        -Green letters are both in the secret word and in the correct position.<br><br>
+        -Five green letters means you've correctly guessed the secret word!
+        </div>
+    </div>
+    <div id="overlay"></div>
+
     <section class="grid">
         <div id="row1">
             <div class="sqr" id="0"></div>
@@ -63,6 +72,41 @@
             <div class="sqr" id="27"></div>
             <div class="sqr" id="28"></div>
             <div class="sqr" id="29"></div>
+        </div>
+    </section>
+    <section class="virtual-keyboard">
+        <div class="kbd-row1">
+            <button class="key">Q</button>
+            <button class="key">W</button>
+            <button class="key">E</button>
+            <button class="key">R</button>
+            <button class="key">T</button>
+            <button class="key">Y</button>
+            <button class="key">U</button>
+            <button class="key">I</button>
+            <button class="key">O</button>
+            <button class="key">P</button>
+        </div>
+        <div class="kbd-row2">
+            <button class="key">A</button>
+            <button class="key">S</button>
+            <button class="key">D</button>
+            <button class="key">F</button>
+            <button class="key">G</button>
+            <button class="key">H</button>
+            <button class="key">K</button>
+            <button class="key">L</button>
+        </div>
+        <div class="kbd-row3">
+            <button class="submit-button">ENTER</button>
+            <button class="key">Z</button>
+            <button class="key">X</button>
+            <button class="key">C</button>
+            <button class="key">V</button>
+            <button class="key">B</button>
+            <button class="key">N</button>
+            <button class="key">M</button>
+            <button class="delete-button">BACK</button>
         </div>
     </section>
 </body>
