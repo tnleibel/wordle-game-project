@@ -11,17 +11,18 @@ let grid
 const rulesButton = document.querySelector(".open-modal")
 const closeRulesButton = document.querySelector(".close-button")
 const rulesOverlay = document.querySelector("#overlay")
-const gridEl = document.querySelectorAll(".sqr")
+const rowsEl = document.querySelectorAll(".row")
 const virtualKbdEl = document.querySelector(".virtual-keyboard")
+const deleteButtonEl = document.querySelector(".delete-button")
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     grid = [
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""]
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
     ]
     turn = 1
     currentRow = 0
@@ -31,22 +32,24 @@ function init() {
 init()
 
 function handleClick(event) {
-    if(event.target.className === "key") {
-        grid[currentRow][currentTile] = event.target.innerHTML
-        console.log(event.target.innerHTML)
-        console.log(grid)
-        updateGrid()
+    if(grid[currentRow].length > 4) {
+        return
     }
-    
+    if(event.target.className === "key") {
+        grid[currentRow].push(event.target.innerHTML)
+        updateGrid()
+        currentTile++
+    }
+}
+
+function deleteTile() {
+    grid[currentRow].pop()
+    updateGrid()
+    currentTile--
 }
 
 function updateGrid() {
-    for(i = 0; i < grid.length; i++) {
-        let tile = grid[i]
-        for(let j = 0; j < tile.length; j++) {
-            gridEl.innerHTML = grid[i][j]
-        }
-    }
+        rowsEl[currentRow].children[currentTile].innerHTML = grid[currentRow][currentTile]
 }
 
 function openModal() {
@@ -70,4 +73,5 @@ closeRulesButton.addEventListener("click", () => {
     closeModal(modal)
 })
 virtualKbdEl.addEventListener("click", handleClick)
+deleteButtonEl.addEventListener("click", deleteTile)
 
