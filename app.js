@@ -12,6 +12,7 @@ const rulesButton = document.querySelector(".open-modal")
 const closeRulesButton = document.querySelector(".close-button")
 const rulesOverlay = document.querySelector("#overlay")
 const gridEl = document.querySelectorAll(".sqr")
+const virtualKbdEl = document.querySelector(".virtual-keyboard")
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     grid = [
@@ -20,7 +21,7 @@ function init() {
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
-        ["", "", "", "", ""],
+        ["", "", "", "", ""]
     ]
     turn = 1
     currentRow = 0
@@ -29,10 +30,23 @@ function init() {
 }
 init()
 
+function handleClick(event) {
+    if(event.target.className === "key") {
+        grid[currentRow][currentTile] = event.target.innerHTML
+        console.log(event.target.innerHTML)
+        console.log(grid)
+        updateGrid()
+    }
+    
+}
+
 function updateGrid() {
-    grid.forEach((square, index) => {
-        gridEl[index].innerHTML = grid[currentRow, index]
-    })
+    for(i = 0; i < grid.length; i++) {
+        let tile = grid[i]
+        for(let j = 0; j < tile.length; j++) {
+            gridEl.innerHTML = grid[i][j]
+        }
+    }
 }
 
 function openModal() {
@@ -55,5 +69,5 @@ closeRulesButton.addEventListener("click", () => {
     const modal = document.querySelector(".modal")
     closeModal(modal)
 })
-
+virtualKbdEl.addEventListener("click", handleClick)
 
