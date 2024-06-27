@@ -1,6 +1,6 @@
-/*-------------------------------- Constants --------------------------------*/
-const secretWord = ["", "", "", "", ""]
 
+/*-------------------------------- Constants --------------------------------*/
+const secretWord = ["Q", "U", "A", "R", "T"]
 /*---------------------------- Variables (state) ----------------------------*/
 let currentRow
 let currentTile
@@ -14,6 +14,7 @@ const rulesOverlay = document.querySelector("#overlay")
 const rowsEl = document.querySelectorAll(".row")
 const virtualKbdEl = document.querySelector(".virtual-keyboard")
 const deleteButtonEl = document.querySelector(".delete-button")
+const sumbitButtonEl = document.querySelector(".submit-button")
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     grid = [
@@ -35,6 +36,9 @@ function handleClick(event) {
     if(grid[currentRow].length > 4) {
         return
     }
+    if(winner === true) {
+        return
+    }
     if(event.target.className === "key") {
         grid[currentRow].push(event.target.innerHTML)
         updateGrid()
@@ -43,9 +47,35 @@ function handleClick(event) {
 }
 
 function deleteTile() {
-    grid[currentRow].pop()
-    updateGrid()
     currentTile--
+    grid[currentRow][currentTile] = ""
+    updateGrid()
+    grid[currentRow].pop()
+}
+
+const checkForWin = (grid, secretWord) => {
+    return JSON.stringify(grid[currentRow]) === JSON.stringify(secretWord)
+}
+
+function submit() {
+    if(grid[currentRow].length < 5) {
+        return
+    }
+    grid[currentRow].forEach((tile, index) => {
+        let secretWordLetter = secretWord[index]
+        if(tile === secretWord[index]) {
+            rowsEl[currentRow].children[index].style.backgroundColor = "green"
+        } else if (secretWord.includes(tile) === true && grid.indexOf(tile) !== secretWord.indexOf(secretWordLetter)) {
+            rowsEl[currentRow].children[index].style.backgroundColor = "yellow"
+        } else {
+            rowsEl[currentRow].children[index].style.backgroundColor = "grey"
+        }
+    })
+    if(checkForWin(grid, secretWord)) {
+        winner = true
+    }
+    currentRow++
+    currentTile = 0
 }
 
 function updateGrid() {
@@ -68,10 +98,15 @@ rulesButton.addEventListener("click", () => {
     const modal = document.querySelector(".modal")
     openModal(modal)
 })
+
 closeRulesButton.addEventListener("click", () => {
     const modal = document.querySelector(".modal")
     closeModal(modal)
 })
+
 virtualKbdEl.addEventListener("click", handleClick)
+
 deleteButtonEl.addEventListener("click", deleteTile)
+
+sumbitButtonEl.addEventListener("click", submit)
 
