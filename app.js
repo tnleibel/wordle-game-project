@@ -1,6 +1,6 @@
-
 /*-------------------------------- Constants --------------------------------*/
-const secretWord = ["Q", "U", "A", "R", "T"]
+import {words} from "./data.js"
+const secretWord = ["q", "u", "a", "r", "t"]
 /*---------------------------- Variables (state) ----------------------------*/
 let currentRow
 let currentTile
@@ -40,7 +40,7 @@ function handleClick(event) {
         return
     }
     if(event.target.className === "key") {
-        grid[currentRow].push(event.target.innerHTML)
+        grid[currentRow].push(event.target.innerHTML.toLowerCase())
         updateGrid()
         currentTile++
     }
@@ -57,29 +57,46 @@ const checkForWin = (grid, secretWord) => {
     return JSON.stringify(grid[currentRow]) === JSON.stringify(secretWord)
 }
 
-function submit() {
-    if(grid[currentRow].length < 5) {
-        return
-    }
-    grid[currentRow].forEach((tile, index) => {
-        let secretWordLetter = secretWord[index]
-        if(tile === secretWord[index]) {
-            rowsEl[currentRow].children[index].style.backgroundColor = "green"
-        } else if (secretWord.includes(tile) === true && grid.indexOf(tile) !== secretWord.indexOf(secretWordLetter)) {
-            rowsEl[currentRow].children[index].style.backgroundColor = "yellow"
-        } else {
-            rowsEl[currentRow].children[index].style.backgroundColor = "grey"
-        }
-    })
-    if(checkForWin(grid, secretWord)) {
-        winner = true
-    }
+function advanceTurn() {
     currentRow++
     currentTile = 0
 }
 
+function submit() {
+    if(grid[currentRow].length < 5) {
+        return
+    }
+    const currentGuess = grid[currentRow].join("")
+    if(!words.some(word => word === currentGuess)) {
+        return
+    }
+    let turningIndex = currentRow
+    grid[turningIndex].forEach((tile, index) => {
+        let secretWordLetter = secretWord[index]
+        if(tile === secretWord[index]) {
+            setTimeout(() => {
+                rowsEl[turningIndex].children[index].classList.add("flip-horizontal-top", "background-green")
+            }, index * 250)
+        } else if (secretWord.includes(tile) === true && grid.indexOf(tile) !== secretWord.indexOf(secretWordLetter)) {
+            setTimeout(() => {
+                rowsEl[turningIndex].children[index].classList.add("flip-horizontal-top", "background-yellow")
+            }, index * 250)
+        } else {
+            setTimeout(() => {
+                rowsEl[turningIndex].children[index].classList.add("flip-horizontal-top", "background-grey")
+            }, index * 250)
+        }
+    })
+    if(checkForWin(grid, secretWord)) {
+        winner = true
+    } else {
+        advanceTurn()
+    }
+    
+}
+
 function updateGrid() {
-        rowsEl[currentRow].children[currentTile].innerHTML = grid[currentRow][currentTile]
+        rowsEl[currentRow].children[currentTile].innerHTML = grid[currentRow][currentTile].toUpperCase()
 }
 
 function openModal() {
