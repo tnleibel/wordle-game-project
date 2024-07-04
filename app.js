@@ -95,6 +95,9 @@ function handleKeystroke(event) {
 }
 
 function deleteTile() {
+  if(currentTile === 0) {
+    return
+  }
   currentTile--;
   grid[currentRow][currentTile] = "";
   updateGrid();
