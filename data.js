@@ -886,6 +886,7 @@ export const words = [
   "goody",
   "gooey",
   "goofy",
+  "goons",
   "goose",
   "gorge",
   "gouge",

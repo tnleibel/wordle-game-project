@@ -88,6 +88,7 @@ body {
     justify-content: center;
     gap: 5px;
     margin-bottom: 5px;
+    text-transform: uppercase;
     
 }
 
@@ -124,11 +125,20 @@ body {
     cursor: pointer;
     font-size: 30px;
     text-align: center;
+    text-transform: uppercase;
     width: 40px;
-    height: 60px;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    /* height: 60px; */
     border: none;
     border-radius: 5px;
+    background-color: #6b6b6b;
+    color: #ffffff;
 }
+
+/* .key:hover, .submit-button:hover, .delete-button:hover {
+    background: #505355;
+} */
 
 .kbd-row1, .kbd-row2, .kbd-row3 {
     display: flex;
@@ -144,6 +154,8 @@ body {
     width: 80px;
     border: none;
     border-radius: 5px;
+    background-color: #6b6b6b;
+    color: #ffffff;
 }
 
 .flip-horizontal-top::after {
@@ -184,6 +196,25 @@ body {
     }
   }
 
+.move-left-right {
+    animation: move-left-right 0.5s;
+}
+
+  @keyframes move-left-right {
+    0% {
+        transform: translateX(0); 
+    }
+    25% {
+        transform: translateX(-50px); 
+    }
+    75% {
+        transform: translateX(50px); 
+    }
+    100% {
+        transform: translateX(0); 
+    }
+}
+
 .key-background-green {
     background-color: #6ca965;
 }
@@ -208,3 +239,26 @@ body {
     background-color: #a6adb2;
 }
 
+@media screen and (max-width: 500px) {
+    .key {
+        font-size: 20px;
+        width: 35px;
+    }
+
+    .submit-button, .delete-button {
+        font-size: 10px;
+        width: 45px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .key {
+        font-size: 20px;
+        width: 30px;
+    }
+
+    .submit-button, .delete-button {
+        font-size: 8px;
+        width: 40px;
+    }
+}
