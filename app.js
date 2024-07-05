@@ -45,6 +45,7 @@ const virtualKbdEl = document.querySelector(".virtual-keyboard");
 const deleteButtonEl = document.querySelector(".delete-button");
 const sumbitButtonEl = document.querySelector(".submit-button");
 const keyboardKeys = document.querySelectorAll(".key");
+const messageEl = document.querySelector(".message");
 /*-------------------------------- Functions --------------------------------*/
 function init() {
   grid = [[], [], [], [], [], []];
@@ -77,6 +78,9 @@ function handleClick(event) {
 }
 
 function handleKeystroke(event) {
+  if (turn > 6) {
+    return;
+  }
   if (grid[currentRow].length > 4 && letterKeys.includes(event.key)) {
     return;
   }
@@ -95,8 +99,11 @@ function handleKeystroke(event) {
 }
 
 function deleteTile() {
-  if(currentTile === 0) {
-    return
+  if (turn > 6) {
+    return;
+  }
+  if (currentTile === 0) {
+    return;
   }
   currentTile--;
   grid[currentRow][currentTile] = "";
@@ -109,11 +116,15 @@ const checkForWin = (grid, secretWord) => {
 };
 
 function advanceTurn() {
+  turn++;
   currentRow++;
   currentTile = 0;
 }
 
 function submit() {
+  if (turn > 6) {
+    return;
+  }
   if (grid[currentRow].length < 5) {
     return;
   }
@@ -134,6 +145,7 @@ function submit() {
   } else {
     advanceTurn();
   }
+  updateMessage();
 }
 
 function processGuessedLetter(tile, index, turningIndex, currentGuess) {
@@ -153,6 +165,7 @@ function processGuessedLetter(tile, index, turningIndex, currentGuess) {
     grid.indexOf(tile) !== secretWord.indexOf(secretWordLetter)
   ) {
     const lettersBefore = currentGuess.slice(0, index);
+    const lettersAfter = currentGuess.slice(turningIndex, index);
     if (!lettersBefore.includes(tile)) {
       setTimeout(() => {
         rowsEl[turningIndex].children[index].classList.add(
@@ -217,6 +230,20 @@ function updateKeyboard() {
         break;
     }
   });
+}
+
+function updateMessage() {
+  if (!winner && turn <= 6) {
+    return;
+  }
+  if (!winner && turn > 6) {
+    messageEl.innerHTML = `You Lose! The Secret Word Was ${secretWord
+      .join("")
+      .toUpperCase()}.`;
+  }
+  if (winner) {
+    messageEl.innerHTML = "You Win!";
+  }
 }
 
 function openModal() {
