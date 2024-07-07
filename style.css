@@ -9,7 +9,7 @@ h1 {
 body {
     display: flex;
     flex-direction: column; 
-    background: #3A3A3C; 
+    background: #28282A; 
 }
 
 .open-modal {
@@ -96,6 +96,7 @@ body {
     width: 70px;
     height: 70px;
     text-align: center;
+    font-weight: bold;
     line-height: 70px;
     font-size: 50px;
     color: #ffffff;
@@ -104,8 +105,8 @@ body {
 }
 
 .sqr::after {
-    border: 3px solid #A6A6A6;
-    background: #3A3A3C;
+    border: 3px solid #757575;
+    background: #28282A;
     text-align: center;
     font-size: 60px;
     content: "";
@@ -124,6 +125,7 @@ body {
 .key {
     cursor: pointer;
     font-size: 30px;
+    font-weight: bold;
     text-align: center;
     text-transform: uppercase;
     width: 40px;
@@ -131,7 +133,7 @@ body {
     padding-bottom: .5em;
     border: none;
     border-radius: 5px;
-    background-color: #A6A6A6;
+    background-color: #757575;
     color: #ffffff;
 }
 
@@ -145,11 +147,12 @@ body {
 .submit-button, .delete-button {
     cursor: pointer;
     font-size: 20px;
+    font-weight: bold;
     text-align: center;
     width: 80px;
     border: none;
     border-radius: 5px;
-    background-color: #A6A6A6;
+    background-color: #757575;
     color: #ffffff;
 }
 
@@ -211,27 +214,27 @@ body {
 }
 
 .key-background-green {
-    background-color: #7DB073;
+    background-color: #68A35C;
 }
 
 .key-background-yellow {
-    background-color: #c8b653;
+    background-color: #A39233;
 }
 
 .key-background-grey {
-    background-color: #a6adb2;
+    background-color: #8C939B;
 }
 
 .flip-horizontal-top.background-green::after {
-    background-color: #7DB073;
+    background-color: #68A35C;
 }
 
 .flip-horizontal-top.background-yellow::after {
-    background-color: #c8b653;
+    background-color: #A39233;
 }
 
 .flip-horizontal-top.background-grey::after {
-    background-color: #a6adb2;
+    background-color: #8C939B;
 }
 
 @media screen and (max-width: 500px) {
