@@ -165,7 +165,6 @@ function processGuessedLetter(tile, index, turningIndex, currentGuess) {
     grid.indexOf(tile) !== secretWord.indexOf(secretWordLetter)
   ) {
     const lettersBefore = currentGuess.slice(0, index);
-    const lettersAfter = currentGuess.slice(turningIndex, index);
     if (!lettersBefore.includes(tile)) {
       setTimeout(() => {
         rowsEl[turningIndex].children[index].classList.add(

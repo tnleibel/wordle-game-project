@@ -104,7 +104,7 @@ body {
 }
 
 .sqr::after {
-    border: 3px solid grey;
+    border: 3px solid #A6A6A6;
     background: #3A3A3C;
     text-align: center;
     font-size: 60px;
@@ -129,16 +129,11 @@ body {
     width: 40px;
     padding-top: .5em;
     padding-bottom: .5em;
-    /* height: 60px; */
     border: none;
     border-radius: 5px;
-    background-color: #6b6b6b;
+    background-color: #A6A6A6;
     color: #ffffff;
 }
-
-/* .key:hover, .submit-button:hover, .delete-button:hover {
-    background: #505355;
-} */
 
 .kbd-row1, .kbd-row2, .kbd-row3 {
     display: flex;
@@ -154,7 +149,7 @@ body {
     width: 80px;
     border: none;
     border-radius: 5px;
-    background-color: #6b6b6b;
+    background-color: #A6A6A6;
     color: #ffffff;
 }
 
@@ -216,7 +211,7 @@ body {
 }
 
 .key-background-green {
-    background-color: #6ca965;
+    background-color: #7DB073;
 }
 
 .key-background-yellow {
@@ -228,7 +223,7 @@ body {
 }
 
 .flip-horizontal-top.background-green::after {
-    background-color: #6ca965;
+    background-color: #7DB073;
 }
 
 .flip-horizontal-top.background-yellow::after {
@@ -240,6 +235,10 @@ body {
 }
 
 @media screen and (max-width: 500px) {
+    .virtual-keyboard {
+        margin-top: 30px;
+    }
+    
     .key {
         font-size: 20px;
         width: 35px;
@@ -252,8 +251,12 @@ body {
 }
 
 @media screen and (max-width: 300px) {
+    .virtual-keyboard {
+        margin-top: 25px;
+    }
+    
     .key {
-        font-size: 20px;
+        font-size: 15px;
         width: 30px;
     }
 
